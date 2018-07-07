@@ -5,12 +5,11 @@ const clearContent = document.querySelector(".clear");
 const equalButton = document.querySelector(".equal");
 const negativeButton = document.querySelector(".negative");
 let operator = "";
-let negativeSign = "";
 let number = {
   firstNum: "",
   secondNum: ""
 };
-
+console.log(operator);
 let shouldLog = true;
 function log(...args) {
   if (shouldLog) {
@@ -25,16 +24,15 @@ function flushContent() {
   operator = "";
 }
 
-// function negativeSign(e, numberObj) {
-//   console.log("test")
-//    let negativeNumber = operator='' ? 'firstNum' : 'secondNum';
-//    if(numberObj[negativeNumber]='') {
-//      numberObj[negativeNumber]= e.target.innerHTML;
-//    }
-// }
+function negativeSign(e, numberObj) {
+  let negativeNumber = operator === "" ? "firstNum" : "secondNum";
+  console.log(negativeNumber, e.target.innerHTML);
+  if (numberObj[negativeNumber] === "") {
+    console.log("reached here");
+    numberObj[negativeNumber] += "-";
 
-function negativeSign(e) {
-  console.log("test");
+    display.innerHTML = "-";
+  }
 }
 
 function displayNum(e, numberObj) {
@@ -90,10 +88,6 @@ function calculate() {
   }
 }
 
-function negativeSign(e) {
-  console.log(e);
-}
-
 numberButtons.forEach(numButton =>
   numButton.addEventListener("click", e => displayNum(e, number))
 );
@@ -102,7 +96,7 @@ operationButtons.forEach(opsButton =>
   opsButton.addEventListener("click", e => displayOps(e))
 );
 equalButton.addEventListener("click", e => calculate(e));
-negativeButton.addEventListener("click", e => negativeSign(e));
+negativeButton.addEventListener("click", e => negativeSign(e, number));
 
 // let firstNum = "";
 // let secondNum = "";
