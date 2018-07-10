@@ -1,3 +1,5 @@
+const calc1 = document.querySelector(".calc1-outerBox");
+const calc2 = document.querySelector(".calc2-outerBox");
 const display = document.querySelectorAll(".result");
 const numberButtons = document.querySelectorAll(".number");
 const operationButtons = document.querySelectorAll(".ops");
@@ -12,12 +14,19 @@ function log(...args) {
   }
 }
 
-numberButtons.forEach(numButton =>
-  numButton.addEventListener("click", e => displayNum(e))
-);
-operationButtons.forEach(opsButton =>
-  opsButton.addEventListener("click", e => displayOps(e))
-);
+function test(e) {
+  console.log(e.target);
+}
+
+calc1.addEventListener("click", e => test(e));
+calc2.addEventListener("click", e => test(e));
+
+// numberButtons.forEach(numButton =>
+//   numButton.addEventListener("click", e => displayNum(e))
+// );
+// operationButtons.forEach(opsButton =>
+//   opsButton.addEventListener("click", e => displayOps(e))
+// );
 
 // function flushContent() {
 //   display.innerHTML = "";

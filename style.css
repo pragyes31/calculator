@@ -3,7 +3,8 @@
   margin: 0px;
 }
 
-.calc-outerBox {
+.calc1-outerBox,
+.calc2-outerBox {
   height: 100vh;
   background-color: #e0e0e0;
   display: flex;
