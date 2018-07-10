@@ -30,7 +30,6 @@ function negativeSign(e, numberObj) {
   if (numberObj[negativeNumber] === "") {
     console.log("reached here");
     numberObj[negativeNumber] += "-";
-
     display.innerHTML = "-";
   }
 }
@@ -52,21 +51,24 @@ function displayNum(e, numberObj) {
 }
 
 function displayOps(e) {
+  if (number.secondNum !== "") {
+    calculate();
+  }
   operator = e.target.innerHTML;
 }
 
 function calculate() {
   if (
     number["firstNum"] !== "" &&
-    operator !== "" &&
-    number["secondNum"] !== ""
+    number["secondNum"] !== "" &&
+    number["secondNum"] !== "-"
   ) {
     let firstNumber = parseFloat(number["firstNum"]);
     let secondNumber = parseFloat(number["secondNum"]);
     let result;
     console.log(typeof firstNumber);
     console.log(typeof secondNumber);
-    // result = (`${firstNumber} ${operator} ${secondNumber}`);
+    //result = `${firstNumber}${operator}${secondNumber}`;
     switch (operator) {
       case "+":
         result = firstNumber + secondNumber;
