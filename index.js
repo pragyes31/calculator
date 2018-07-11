@@ -16,6 +16,7 @@ function log(...args) {
 
 function test(e) {
   console.log(e.target);
+  display[0].innerHTML += e.target.innerHTML;
 }
 
 calc1.addEventListener("click", e => test(e));
