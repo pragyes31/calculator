@@ -5,17 +5,25 @@ const displayNum2 = document.querySelector(".calc2-outerBox .result");
 const calc1ops = document.querySelectorAll(".calc1-outerBox .ops");
 const calc2ops = document.querySelectorAll(".calc2-outerBox .ops");
 
+let shouldLog = true;
+function log(...args) {
+  if (shouldLog) {
+    console.log(...args);
+  }
+}
 function displayNum(display, eve) {
   let firstNum = "";
   let secondNum = "";
-
-  display.innerHTML += eve.target.innerHTML;
+  let opsValue = "";
+  let numberClicked = opsValue === "" ? firstNum : secondNum;
+  numberClicked += eve.target.innerHTML;
+  console.log(numberClicked);
+  display.innerHTML += numberClicked;
 }
 
 function recordOps(eve) {
   let operator = "";
   operator = eve.target.innerHTML;
-  displayNum;
   console.log(operator);
 }
 
@@ -27,10 +35,3 @@ calc2Numbers.forEach(e =>
 );
 calc1ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
 calc2ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
-
-let shouldLog = true;
-function log(...args) {
-  if (shouldLog) {
-    console.log(...args);
-  }
-}
