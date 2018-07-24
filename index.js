@@ -11,27 +11,31 @@ function log(...args) {
     console.log(...args);
   }
 }
-function displayNum(display, eve) {
-  let firstNum = "";
-  let secondNum = "";
-  let opsValue = "";
-  let numberClicked = opsValue === "" ? firstNum : secondNum;
-  numberClicked += eve.target.innerHTML;
-  console.log(numberClicked);
-  display.innerHTML += numberClicked;
-}
 
-function recordOps(eve) {
-  let operator = "";
-  operator = eve.target.innerHTML;
-  console.log(operator);
-}
+const calculator = {
+  operator: "",
+  firstNum: "",
+  secondNum: "",
+  recordOps: function(eve) {
+    operator = eve.target.innerHTML;
+    console.log(operator);
+  },
+  displayNum: function(display, eve) {
+    let numberClicked = operator === "" ? firstNum : secondNum;
+    numberClicked += eve.target.innerHTML;
+    console.log(numberClicked);
+    display.innerHTML += numberClicked;
+  }
+};
 
 calc1Numbers.forEach(e =>
-  e.addEventListener("click", eve => displayNum(displayNum1, eve))
+  e.addEventListener("click", eve => calculator.displayNum(displayNum1, eve))
 );
-calc2Numbers.forEach(e =>
-  e.addEventListener("click", eve => displayNum(displayNum2, eve))
-);
-calc1ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
-calc2ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
+// calc1Numbers.forEach(e =>
+//   e.addEventListener("click", eve => displayNum(displayNum1, eve))
+// );
+// calc2Numbers.forEach(e =>
+//   e.addEventListener("click", eve => displayNum(displayNum2, eve))
+// );
+// calc1ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
+// calc2ops.forEach(e => e.addEventListener("click", eve => recordOps(eve)));
