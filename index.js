@@ -27,14 +27,12 @@ const calculator = {
   },
   displayNum: function(display, eve) {
     let numberClicked =
-      calculator.operator === "" ? calculator.firstNum : calculator.secondNum;
-    numberClicked += eve.target.innerHTML;
-    console.log(numberClicked);
-    display.innerHTML += numberClicked;
-    console.log(
-      calculator.firstNum,
-      calculator.firstNum + "testing displaynum"
-    );
+      calculator["operator"] === "" ? "firstNum" : "secondNum";
+    console.log(calculator[numberClicked]);
+    calculator[numberClicked] += eve.target.innerHTML;
+    console.log(numberClicked, calculator.firstNum);
+    //console.log(calculator.operator, calculator.firstNum);
+    display.innerHTML = calculator[numberClicked];
   },
   clearDisplay: function(display) {
     calculator.firstNum = "";
