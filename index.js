@@ -8,6 +8,8 @@ const calc1ClearButton = document.querySelector(".calc1-outerBox .clear");
 const calc2ClearButton = document.querySelector(".calc2-outerBox .clear");
 const calc1Equal = document.querySelector(".calc1-outerBox .equal");
 const calc2Equal = document.querySelector(".calc2-outerBox .equal");
+const calc1Negative = document.querySelector(".calc1-outerBox .negative");
+const calc2Negative = document.querySelector(".calc2-outerBox .negative");
 
 let shouldLog = true;
 function log(...args) {
@@ -40,7 +42,7 @@ const calculator = {
     }
     console.log(calculator[numberClicked]);
     console.log(numberClicked, calculator.firstNum);
-    //console.log(calculator.operator, calculator.firstNum);
+    console.log(calculator.operator, calculator.firstNum);
     display.innerHTML = calculator[numberClicked];
   },
   clearDisplay: function(display) {
@@ -48,6 +50,15 @@ const calculator = {
     calculator.secondNum = "";
     calculator.operator = "";
     display.innerHTML = "";
+  },
+  negSign: function(display, eve) {
+    let negativeNumber =
+      calculator["operator"] === "" ? "firstNum" : "secondNum";
+    if (calculator[negativeNumber] === "") {
+      console.log("reached here");
+      calculator[negativeNumber] += "-";
+      display.innerHTML = "-";
+    }
   },
   calculate: function(display) {
     console.log(
@@ -81,7 +92,6 @@ const calculator = {
           result = firstNumber / secondNumber;
           break;
       }
-      console.log(result);
       display.innerHTML = result;
       calculator.firstNum = result.toString();
       console.log(calculator.firstNum, calculator.secondNum);
@@ -115,4 +125,10 @@ calc1Equal.addEventListener("click", eve =>
 );
 calc2Equal.addEventListener("click", eve =>
   calculator.calculate(calc2Result, eve)
+);
+calc1Negative.addEventListener("click", eve =>
+  calculator.negSign(calc1Result, eve)
+);
+calc2Negative.addEventListener("click", eve =>
+  calculator.negSign(calc2Result, eve)
 );
