@@ -21,15 +21,24 @@ const calculator = {
   firstNum: "",
   secondNum: "",
   recordOps: function(display, eve) {
+    if (calculator.secondNum !== "") {
+      calculator.calculate(display);
+    }
     calculator.operator = eve.target.innerHTML;
     console.log(calculator.operator);
-    display.innerHTML = "";
   },
   displayNum: function(display, eve) {
+    let num = eve.target.innerHTML;
     let numberClicked =
       calculator["operator"] === "" ? "firstNum" : "secondNum";
+    if (num === ".") {
+      calculator[numberClicked] += calculator[numberClicked].includes(".")
+        ? ""
+        : num;
+    } else {
+      calculator[numberClicked] += eve.target.innerHTML;
+    }
     console.log(calculator[numberClicked]);
-    calculator[numberClicked] += eve.target.innerHTML;
     console.log(numberClicked, calculator.firstNum);
     //console.log(calculator.operator, calculator.firstNum);
     display.innerHTML = calculator[numberClicked];
@@ -75,7 +84,9 @@ const calculator = {
       console.log(result);
       display.innerHTML = result;
       calculator.firstNum = result.toString();
-      calculator.SecondNum = "";
+      console.log(calculator.firstNum, calculator.secondNum);
+      calculator.secondNum = "";
+      console.log(calculator.firstNum, calculator.secondNum);
       calculator.operator = "";
     }
   }
@@ -101,4 +112,7 @@ calc2ops.forEach(e =>
 );
 calc1Equal.addEventListener("click", eve =>
   calculator.calculate(calc1Result, eve)
+);
+calc2Equal.addEventListener("click", eve =>
+  calculator.calculate(calc2Result, eve)
 );
