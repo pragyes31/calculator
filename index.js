@@ -26,7 +26,9 @@ function createCalculator() {
     firstNum: "",
     secondNum: "",
     recordOps: function(display, eve) {
-      if (calculator.secondNum !== "") {
+      if (calculator["firstNum"] === "-") return;
+      // firstNum should atleast have one number. it can not be just '-'. NaN
+      else if (calculator.secondNum !== "") {
         calculator.calculate(display);
       }
       calculator.operator = eve.target.innerHTML;
@@ -73,7 +75,8 @@ function createCalculator() {
       if (
         calculator.firstNum !== "" &&
         calculator.operator !== "" &&
-        calculator.secondNum !== ""
+        calculator.secondNum !== "" &&
+        calculator.secondNum !== "-"
       ) {
         console.log("passed");
         let firstNumber = parseFloat(calculator.firstNum);
