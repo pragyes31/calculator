@@ -1,17 +1,5 @@
 const calc1 = document.querySelector(".calc1-outerBox");
 const calc2 = document.querySelector(".calc2-outerBox");
-const calc1Numbers = document.querySelectorAll(".calc1-outerBox .number");
-const calc2Numbers = document.querySelectorAll(".calc2-outerBox .number");
-const calc1Result = document.querySelector(".calc1-outerBox .result");
-const calc2Result = document.querySelector(".calc2-outerBox .result");
-const calc1ops = document.querySelectorAll(".calc1-outerBox .ops");
-const calc2ops = document.querySelectorAll(".calc2-outerBox .ops");
-const calc1ClearButton = document.querySelector(".calc1-outerBox .clear");
-const calc2ClearButton = document.querySelector(".calc2-outerBox .clear");
-const calc1Equal = document.querySelector(".calc1-outerBox .equal");
-const calc2Equal = document.querySelector(".calc2-outerBox .equal");
-const calc1Negative = document.querySelector(".calc1-outerBox .negative");
-const calc2Negative = document.querySelector(".calc2-outerBox .negative");
 
 let shouldLog = true;
 function log(...args) {
@@ -20,7 +8,14 @@ function log(...args) {
   }
 }
 
-function createCalculator() {
+function createCalculator(calcDivId) {
+  const calcNumbers = document.querySelectorAll("." + calcDivId + " .number");
+  const calcResult = document.querySelector("." + calcDivId + " .result");
+  const calcops = document.querySelectorAll("." + calcDivId + " .ops");
+  const calcClearButton = document.querySelector("." + calcDivId + " .clear");
+  const calcEqual = document.querySelector("." + calcDivId + " .equal");
+  const calcNegative = document.querySelector("." + calcDivId + " .negative");
+
   const calculator = {
     operator: "",
     firstNum: "",
@@ -35,6 +30,7 @@ function createCalculator() {
       console.log(calculator.operator);
     },
     displayNum: function(display, eve) {
+      console.log("entered displayNum");
       let num = eve.target.innerHTML;
       let numberClicked =
         calculator["operator"] === "" ? "firstNum" : "secondNum";
@@ -107,40 +103,43 @@ function createCalculator() {
       }
     }
   };
-
   return calculator;
+
+  calcNumbers.forEach(e =>
+    e.addEventListener("click", eve => calculator.displayNum(calcResult, eve))
+  );
 }
 
-const calculator1st = createCalculator();
-const calculator2nd = createCalculator();
+const calculator1st = createCalculator("calc1-outerBox");
+const calculator2nd = createCalculator("calc1-outerBox");
 
-calc1Numbers.forEach(e =>
-  e.addEventListener("click", eve => calculator1st.displayNum(calc1Result, eve))
-);
-calc2Numbers.forEach(e =>
-  e.addEventListener("click", eve => calculator2nd.displayNum(calc2Result, eve))
-);
-calc1ClearButton.addEventListener("click", eve =>
-  calculator1st.clearDisplay(calc1Result)
-);
-calc2ClearButton.addEventListener("click", eve =>
-  calculator2nd.clearDisplay(calc2Result)
-);
-calc1ops.forEach(e =>
-  e.addEventListener("click", eve => calculator1st.recordOps(calc1Result, eve))
-);
-calc2ops.forEach(e =>
-  e.addEventListener("click", eve => calculator2nd.recordOps(calc2Result, eve))
-);
-calc1Equal.addEventListener("click", eve =>
-  calculator1st.calculate(calc1Result, eve)
-);
-calc2Equal.addEventListener("click", eve =>
-  calculator2nd.calculate(calc2Result, eve)
-);
-calc1Negative.addEventListener("click", eve =>
-  calculator1st.negSign(calc1Result, eve)
-);
-calc2Negative.addEventListener("click", eve =>
-  calculator2nd.negSign(calc2Result, eve)
-);
+// calc1Numbers.forEach(e =>
+//   e.addEventListener("click", eve => calculator1st.displayNum(calc1Result, eve))
+// );
+// calc2Numbers.forEach(e =>
+//   e.addEventListener("click", eve => calculator2nd.displayNum(calc2Result, eve))
+// );
+// calc1ClearButton.addEventListener("click", eve =>
+//   calculator1st.clearDisplay(calc1Result)
+// );
+// calc2ClearButton.addEventListener("click", eve =>
+//   calculator2nd.clearDisplay(calc2Result)
+// );
+// calc1ops.forEach(e =>
+//   e.addEventListener("click", eve => calculator1st.recordOps(calc1Result, eve))
+// );
+// calc2ops.forEach(e =>
+//   e.addEventListener("click", eve => calculator2nd.recordOps(calc2Result, eve))
+// );
+// calc1Equal.addEventListener("click", eve =>
+//   calculator1st.calculate(calc1Result, eve)
+// );
+// calc2Equal.addEventListener("click", eve =>
+//   calculator2nd.calculate(calc2Result, eve)
+// );
+// calc1Negative.addEventListener("click", eve =>
+//   calculator1st.negSign(calc1Result, eve)
+// );
+// calc2Negative.addEventListener("click", eve =>
+//   calculator2nd.negSign(calc2Result, eve)
+// );
