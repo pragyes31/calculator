@@ -10,6 +10,7 @@ function log(...args) {
 
 function createCalculator(calcDivId) {
   const calcNumbers = document.querySelectorAll("." + calcDivId + " .number");
+  console.log(calcNumbers);
   const calcResult = document.querySelector("." + calcDivId + " .result");
   const calcops = document.querySelectorAll("." + calcDivId + " .ops");
   const calcClearButton = document.querySelector("." + calcDivId + " .clear");
@@ -103,15 +104,28 @@ function createCalculator(calcDivId) {
       }
     }
   };
-  return calculator;
 
   calcNumbers.forEach(e =>
     e.addEventListener("click", eve => calculator.displayNum(calcResult, eve))
   );
+  calcClearButton.addEventListener("click", eve =>
+    calculator.clearDisplay(calcResult)
+  );
+
+  calcops.forEach(e =>
+    e.addEventListener("click", eve => calculator.recordOps(calcResult, eve))
+  );
+  calcEqual.addEventListener("click", eve =>
+    calculator.calculate(calcResult, eve)
+  );
+  calcNegative.addEventListener("click", eve =>
+    calculator.negSign(calcResult, eve)
+  );
+  return calculator;
 }
 
 const calculator1st = createCalculator("calc1-outerBox");
-const calculator2nd = createCalculator("calc1-outerBox");
+const calculator2nd = createCalculator("calc2-outerBox");
 
 // calc1Numbers.forEach(e =>
 //   e.addEventListener("click", eve => calculator1st.displayNum(calc1Result, eve))
